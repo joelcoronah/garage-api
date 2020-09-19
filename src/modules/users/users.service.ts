@@ -1,7 +1,10 @@
-import { Injectable, InternalServerErrorException, NotAcceptableException } from '@nestjs/common';
+import { ForbiddenException, Injectable,
+    InternalServerErrorException,
+    NotAcceptableException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/models';
 import { Status } from 'src/shared/enum/status.enum';
+import { IResponseStructureReturn } from 'src/shared/interfaces/responsesReturn.interface';
 import { BasicService } from 'src/shared/services/base.service';
 import { Repository } from 'typeorm';
 import { CreateUserDTO } from './dto/createUserDTO.dto';
@@ -9,6 +12,8 @@ import { UserUniqueFieldsDto } from './dto/unique.dto';
 
 @Injectable()
 export class UsersService extends BasicService<User> {
+
+    private relations = [];
 
     constructor(
         @InjectRepository(User)
@@ -72,6 +77,33 @@ export class UsersService extends BasicService<User> {
         return this.createQueryBuilder()
             .where('status <> :status', { status: Status.DELETED })
             .getMany();
+    }
+
+     /**
+     * Find User by id
+     * 
+     * @param id User id.
+     */
+    async findById(id: number, response: any): Promise<IResponseStructureReturn> {
+        const user = await this.getUserByIdWithRelations(id, response.noPermission);
+
+        return this.formatReturn(response.success, 'user', user);
+    }
+
+    /**
+     * Get user by id with relations
+     * @param id id to find
+     * @param response Response in case of error with the structure
+     */
+    async getUserByIdWithRelations(id: number, response: any) {
+        return await this.findOneOrFail(id,
+            {
+                where: `User.status <> '${Status.DELETED}'`,
+                relations: this.relations
+            })
+            .catch(() => {
+                throw new NotFoundException(response);
+            });
     }
 
 }

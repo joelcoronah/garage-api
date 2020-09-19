@@ -3,6 +3,7 @@ import {
     Patch, Post, Put, Req, UnauthorizedException, UseInterceptors, UsePipes
 } from '@nestjs/common';
 import { User } from 'src/models';
+import { IResponseStructureReturn } from 'src/shared/interfaces/responsesReturn.interface';
 import { ValidationPipe } from '../../shared/pipes/validation.pipe';
 import { userResponses } from '../../shared/responses/users.response';
 import { CreateUserDTO } from './dto/createUserDTO.dto';
@@ -33,5 +34,15 @@ export class UsersController {
     @Get()
     async findAll(): Promise<any> {
         return await this.userService.findAll();
+    }
+    
+    /**
+     * Gets a user with specified id
+     * 
+     * @param id user id  
+     */
+    @Get(':id')
+    findById(@Param('id') id: number): Promise<IResponseStructureReturn> {
+        return this.userService.findById(id, userResponses.list);
     }
 }
