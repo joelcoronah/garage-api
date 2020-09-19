@@ -1,8 +1,9 @@
-import { Injectable, InternalServerErrorException, NotAcceptableException } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, NotAcceptableException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Car } from 'src/models';
-import { Status } from 'src/shared/enum/status.enum';
-import { BasicService } from 'src/shared/services/base.service';
+import { Car } from '../../models';
+import { Status } from '../../shared/enum/status.enum';
+import { IResponseStructureReturn } from '../../shared/interfaces/responsesReturn.interface';
+import { BasicService } from '../../shared/services/base.service';
 import { Repository } from 'typeorm';
 import { CreateCarDto } from './dto/createCar.dto';
 import { CarUniqueFieldsDto } from './dto/unique.dto';
@@ -62,6 +63,49 @@ export class CarsService extends BasicService<Car> {
             throw new NotAcceptableException(response.plateExist);
         }
 
+    }
+
+    /**
+     *  Find all Cars
+     *  @return Promise with all cars.
+     */
+    async findAll(idUser?: number): Promise<Car[]> {
+        if (idUser) {
+            return this.createQueryBuilder('c')
+                .where('c.status <> :status', { status: Status.DELETED })
+                .andWhere('c.idUser = :idUser', { idUser })
+                .getMany();
+        }
+        return this.createQueryBuilder()
+            .where('status <> :status', { status: Status.DELETED })
+            .getMany();
+    }
+
+    /**
+     * Find Car by id
+     * 
+     * @param id User id.
+     */
+    async findById(id: number, response: any): Promise<IResponseStructureReturn> {
+        const user = await this.getCarByIdWithRelations(id, response.noPermission);
+
+        return this.formatReturn(response.success, 'user', user);
+    }
+
+    /**
+     * Get car by id with relations
+     * @param id id to find
+     * @param response Response in case of error with the structure
+     */
+    async getCarByIdWithRelations(id: number, response: any) {
+        return await this.findOneOrFail(id,
+            {
+                where: `User.status <> '${Status.DELETED}'`,
+                relations: this.relations
+            })
+            .catch(() => {
+                throw new NotFoundException(response);
+            });
     }
 
 }
