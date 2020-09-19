@@ -10,6 +10,8 @@ import {
     UpdateDateColumn,
 } from 'typeorm';
 
+import { Car } from '.';
+
 @Index('users_pkey', ['id'], { unique: true })
 @Index('users_identity_document_key', ['identityDocument'], { unique: true })
 @Index('users_mail_key', ['mail'], { unique: true })
@@ -65,5 +67,14 @@ export class User {
         comment: 'Modification date and time of the user'
     })
     modificationDate: Date | null;
+
+    /**
+     *  Cars of the user
+     */
+    @OneToMany(
+        () => Car,
+        car => car.user
+    )
+    cars: Car[];
 
 }

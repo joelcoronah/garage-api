@@ -5,16 +5,6 @@ export const userResponses = {
             status: false,
             message: 'You do not have the necessary permissions to perform this action.' 
         },
-        cantAssignRole: {
-            code: '',
-            status: '',
-            message: 'An error occurred while saving the user role',
-        },
-        cantCreateWallet: {
-            code: '',
-            status: '',
-            message: 'An error occurred while saving the user wallet',
-        },
         mailExists: {
             code:	1011,
             status: false,
@@ -30,16 +20,6 @@ export const userResponses = {
             status: false,
             message: 'The username is already registered.' 
         },
-        valueBeUnique: {
-            code:	1012,
-            status: false,
-            message: 'An entered value already exist and has to be unique' 
-        },
-        usernameNotValid: {
-            code:	1014,
-            status: false,
-            message: 'username not valid' 
-        },
         error: {
             code:	1019,
             status: false,
@@ -49,43 +29,6 @@ export const userResponses = {
             code:	1110,
             status: true,
             message: 'The User has been successfully created.' 
-        }
-    },
-    modification: {
-        noPermission: {
-            code:	1020,
-            status: false,
-            message: 'You do not have the necessary permissions to perform this action.' 
-        },
-        mailExists: {
-            code:	1021,
-            status: false,
-            message: 'The mail is already registered.' 
-        },
-        documentExists: {
-            code:	1022,
-            status: false,
-            message: 'The identification document is already registered.' 
-        },
-        usernameExists: {
-            code:	1023,
-            status: false,
-            message: 'The username is already registered.' 
-        },
-        usernameNotValid: {
-            code:	1024,
-            status: false,
-            message: 'username not valid' 
-        },
-        error: {
-            code:	1029,
-            status: false,
-            message: 'The User could not be updated, an error has occurred.' 
-        },
-        success: {
-            code:	1120,
-            status: true,
-            message: 'The User has been successfully updated.' 
         }
     },
     list: {
@@ -108,40 +51,6 @@ export const userResponses = {
             code:	1130,
             status: true,
             message: 'The User(s) has been successfully listed.' 
-        }
-    },
-    enable: {
-        noPermission: {
-            code:	1050,
-            status: false,
-            message: 'You do not have the necessary permissions to perform this action.' 
-        },
-        error: {
-            code:	1059,
-            status: false,
-            message: 'The User could not be enabled, an error has occurred.' 
-        },
-        success: {
-            code:	1150,
-            status: true,
-            message: 'The User has been successfully enabled.' 
-        }
-    },
-    disable: {
-        noPermission: {
-            code:	1040,
-            status: false,
-            message: 'You do not have the necessary permissions to perform this action.' 
-        },
-        error: {
-            code:	1049,
-            status: false,
-            message: 'The User could not be disabled, an error has occurred.' 
-        },
-        success: {
-            code:	1140,
-            status: true,
-            message: 'The User has been successfully disabled.' 
         }
     },
     delete: {
