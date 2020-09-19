@@ -5,7 +5,7 @@ export const carResponses = {
             status: false,
             message: 'You do not have the necessary permissions to perform this action.' 
         },
-        plateExists: {
+        plateExist: {
             code:	1011,
             status: false,
             message: 'The plate is already registered.' 

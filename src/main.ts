@@ -16,6 +16,7 @@ async function bootstrap() {
 
     const cors = {
         origin: [
+            'http://localhost:4200',
             '*',
         ],
         methods: 'GET, HEAD, PUT, PATCH, POST, DELETE, OPTIONS',
