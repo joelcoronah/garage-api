@@ -1,8 +1,19 @@
 import { NestFactory } from '@nestjs/core';
 import { useContainer } from 'class-validator';
 import { AppModule } from './app.module';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
+
+    const options = new DocumentBuilder()
+        .setTitle('Garage API')
+        .setDescription('Documentation of Garage API, CAR SHOP')
+        .setVersion('1.0')
+        .build();
+    const document = SwaggerModule.createDocument(app, options);
+    SwaggerModule.setup('api', app, document);
+
     const cors = {
         origin: [
             '*',
