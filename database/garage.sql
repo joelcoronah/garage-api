@@ -57,11 +57,8 @@ CREATE TABLE public.repairs (
 	id bigserial NOT NULL,
 	
 	name VARCHAR(100) NOT NULL,
-	description VARCHAR(100) NOT NULL,
+	description VARCHAR(400) NOT NULL,
 	id_car int4 NOT NULL,
-	
-	brand VARCHAR(100) NOT NULL,
-	plate VARCHAR(50) NOT NULL,
 	
 	status VARCHAR(100) NOT NULL,
 	creation_date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,

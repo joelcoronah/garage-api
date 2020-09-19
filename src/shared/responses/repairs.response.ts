@@ -1,4 +1,4 @@
-export const carResponses = {
+export const repairResponses = {
     creation: {
         noPermission: {
             code:	1010,
@@ -13,12 +13,12 @@ export const carResponses = {
         error: {
             code:	1019,
             status: false,
-            message: 'The Car could not be created, an error has occurred.' 
+            message: 'The Car repair could not be created, an error has occurred.' 
         },
         success: {
             code:	1110,
             status: true,
-            message: 'The Car has been successfully created.' 
+            message: 'The Car repair has been successfully created.' 
         }
     },
     list: {
@@ -30,17 +30,17 @@ export const carResponses = {
         notFound: {
             code:	1031,
             status: false,
-            message: 'Car not found.' 
+            message: 'Car repair not found.' 
         },
         error: {
             code:	1039,
             status: false,
-            message: 'The Car(s) could not be listed, an error has occurred.' 
+            message: 'The Car repair(s) could not be listed, an error has occurred.' 
         },
         success: {
             code:	1130,
             status: true,
-            message: 'The Car(s) has been successfully listed.' 
+            message: 'The Car repair(s) has been successfully listed.' 
         }
     }
 };
