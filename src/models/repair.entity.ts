@@ -29,7 +29,6 @@ export class Repair {
     @Column('timestamp without time zone', {
         name: 'creation_date',
         default: () => 'CURRENT_TIMESTAMP',
-        select: false,
     })
     creationDate: Date;
 

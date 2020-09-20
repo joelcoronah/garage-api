@@ -37,10 +37,12 @@ export class RepairsService extends BasicService<Repair> {
             return this.createQueryBuilder('c')
                 .where('c.status <> :status', { status: Status.DELETED })
                 .andWhere('c.idCar = :idCar', { idCar })
+                .orderBy('c.creationDate', 'DESC')
                 .getMany();
         }
-        return this.createQueryBuilder()
-            .where('status <> :status', { status: Status.DELETED })
+        return this.createQueryBuilder('c')
+            .where('c.status <> :status', { status: Status.DELETED })
+            .orderBy('c.creationDate', 'DESC')
             .getMany();
     }
 }
