@@ -22,7 +22,7 @@ If you have questions or need help integrating the app please [contact me](http:
 
 ## Documentation
 
-To see the documentation endpoint, go to `http://localhost:3000/`.
+To see the documentation endpoint, go to `http://localhost:3000/api`.
 
 
 ## Licensing
